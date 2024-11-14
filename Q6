@@ -1,0 +1,81 @@
+
+//This java code can identify the largest and secondlargest number and display them,
+//also it can calculate the number of times it occurence, it can also find whether a negative number enter
+package com.mycompany.viva6;
+import java.util.Scanner;
+ 
+public class VIVA6 {
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);//Creates a scanner object to read user input from the console.
+        System.out.println("Enter the number: ");
+       
+        int max = Integer.MIN_VALUE;//initialize the max to MIN_VALUE because in the next step we need to use it to store the largest number
+        int secondmax = Integer.MIN_VALUE;//initialize the secondmax to MIN_VALUE it will store the secondmax number later
+        int countmax = 0;//this is used for counting the occurences of largest number it is innitialized to 0;
+        int countsecondmax = 0;//this is used for counting the occurences of second largest number it is innitialized to 0;
+        int count3 = 0;//this will record whether a negative number is entered
+        int sum = 0; //sum each score together 
+        boolean hasSecondMax = false;//is a boolean that indicates if a ssecond largest number 
+//循环终止输入
+        while (true){//the loop will continuesly perform the operation, until we enter a 0
+             int score = input.nextInt();//allow user to enter a number 
+              if (score == 0){//this is used for end and skiping from the loop if 
+                 break;//0 entered
+              }
+             if (score>max) {//using if-elseif structure to perform some conditions 
+                 //this is condition 1：score>max
+                 secondmax = max;//update secondmax to max
+                 countsecondmax = countmax;  //this is very important update countsecondmax to countmax , the previous count of max
+                 max = score;//update max to score to store the max just find    
+                 
+                 countmax = 1;//reset countmax to 1
+             
+             hasSecondMax = true;//hasSecondMax is true, so the secondmax number exist
+             }
+             else if (score == max){//condition2 score=max, it means the largest number begin to repeat
+                    countmax++;  //count the number of max number and countmax can store the number occurrences of max 
+             } 
+             
+             else if (score > secondmax) {//condition3 score>secondmax                           
+                //in this case it means there exists a number that is larger that the secondmax(after the function secondmax=max)
+                //so we just update it to score 
+                secondmax = score; 
+                 countsecondmax = 1;//we reset the countsecondmax=1 as a new secondmax is appear
+                 hasSecondMax = true;//it is said that there do exist a secondlargest number
+             }
+            else if(score == secondmax){//condition4:score=secondmax it means the secondmax begain to repeat
+                //we just continue to update the countsecondmax it will hold the number of the occurence of the secondmax 
+                countsecondmax++;
+                 hasSecondMax = true;//it means there exists a second largest number
+            }
+                
+               if (score < 0){//using if strcture to check whether there exist a negative number
+               count3 ++;//if it does, then update count3, and it will store the occurrences of the negative number
+               }
+                 
+                 
+                 sum += score;//we use sum in the loop to continuesly sum the score
+        }
+        
+        System.out.print("The largest number is " + max); //print the larhest number
+        System.out.println("\nThe occurrence count of the largest number is " + countmax);  //print the occurrence of the largest number      
+        if (hasSecondMax){//use if-else structure to check which condition is suitable based on 
+            //whether the hasSecondMax is true or not
+        System.out.print("The second-largest number is " + secondmax); //if true print secondmax        
+        System.out.println("The occurrence count of the second-largest number is " + countsecondmax);//if ture print the number of occurrence of the secondmax
+        } 
+        else {
+            System.out.println("There's no secondmax number!");
+        }
+        System.out.print("The total sum of all numbers is " + sum);//just print the total sum of the number 
+        if (count3 > 0){//count3>0 it means negative numbers exist
+        System.out.print("\nNegative number were entered");
+        
+        }
+        
+        else {
+        System.out.print("There's no negative number");
+        }  
+    } 
+}
