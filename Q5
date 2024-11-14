@@ -1,0 +1,61 @@
+
+//This Java code processes a string to remove occurrences of the word "REMIX" 
+//and outputs the remaining parts concatenated together.
+package com.mycompany.viva5;
+import java.util.Scanner;
+
+public class Viva5 {
+//We choose the .indexOf() and .lastindexOf() and substring() to solve the problem
+    public static void main(String[] args) {
+        Scanner str = new Scanner(System.in);//Creates a scanner object to read user input from the console.
+        System.out.println("Enter your song: ");
+        String song = str.nextLine().toUpperCase();//Reads the input and converts it to uppercase, 
+        //storing it in song to make "REMIX" searches case-insensitive.
+        
+        
+        int k = song.indexOf("REMIX");   //k stores the position of the first occurrence of "REMIX," 
+        int g = song.lastIndexOf("REMIX"); //lastREMIX   while g stores the position of the last occurrence.
+
+        int length = song.length();//length holds the total length of the string, and fanhui will be used to store positions of "REMIX" found in a loop.
+        int fanhui = 0; //and fanhui will be used to store positions of "REMIX" found in a loop.
+        
+        //Now we move to the Logical Processing
+        if (k>0&&length<200){//To check if the first occurrence of "REMIX" is after the start of the string (k > 0) 
+            //and if the total length of song is less than 200 characters.Then this prints the portion of the string before the first "REMIX" found.
+            System.out.print(song.substring(0, k) + " ");//by using substring(0,k)we can print the portions before the first occerences of REMIX
+            while ((fanhui = song.indexOf("REMIX", k+5)) != -1){
+            //Searches for the next "REMIX" in the string, starting from the first position of the REM
+            //Each occurrence updates fanhui.
+            System.out.print(song.substring(k+5, fanhui) + " ");//Prints the section between two "REMIX" occurrences, 
+            //using substring method it can display the string from (k+5) to (fanhui) this is very suiitable 
+            
+            k = fanhui;
+            // after each loop, k is updated to the position that fanhui holds so that we could continue our loop;     
+            }
+              
+        if (g + 5 < length){//by using if structure, we can identify whether there is a remaining part after the final occerence of REMIX
+            System.out.print(song.substring(g + 5));  //if it is then using substring to print the remianing part
+            }
+        
+        }
+        
+        else if(k==0&&length<200){//To check whether the REMIX is at the start of the string and song's length is less than 200
+        
+            while ((fanhui = song.indexOf("REMIX", k+5)) != -1){//Searches the next REMIX after the first REMIX 
+            
+            System.out.print(song.substring(k+5, fanhui) + " "); //using substring just to print the portion from(k+5) to (fanhui)
+            
+            k = fanhui;
+            //then the k will be updated, it then holds the position of fanhui previously holds in order to continue the loop     
+            }
+              
+        if (g + 5 < length){//by using if structure, we can identify whether there is a remaining part after the final occerence of REMIX
+            System.out.print(song.substring(g + 5));  //if it is then using substring to print the remianing part
+            }
+        //if g does not suitable for the situation the code will do nothing
+        }
+        else{
+        System.out.println("Do this again!");
+        }   
+    }
+}
